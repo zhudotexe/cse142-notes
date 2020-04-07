@@ -10,6 +10,8 @@ Welcome to cse142-notes's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   intro
+
 
 
 Indices and tables
