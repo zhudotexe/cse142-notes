@@ -209,4 +209,109 @@ Overall, variance represents estimation error (limits due to data) and bias repr
 
 These concepts are closely linked to the concept of overfitting/underfitting.
 
+Evaluation
+----------
+There are lots of ways to measure predictive performance. The most popular are:
 
+- Accuracy and Error Rate
+- Precision Recall and F-measure
+
+Accuracy
+^^^^^^^^
+Useful in X vs. Y problems, where any classes are equally important.
+
+.. math::
+    accuracy = \frac{\text{# correct predictions}}{\text{# test instances}}
+
+.. math::
+    error = 1 - accuracy = \frac{\text{# incorrect predictions}}{\text{# test instances}}
+
+Confusion Matrix
+^^^^^^^^^^^^^^^^
+An extension of accuracy - given a matrix of positive and negative instances, it is possible to make a matrix
+
+.. code-block:: text
+
+             Predicted
+               Y   N
+             +-------
+    Actual Y | TP  FN       Where TP = True Positive, FN = False Negative,
+           N | FP  TN       FP = False Positive, TN = True Negative
+
+**Example**: Given the result table
+
+.. code-block:: text
+
+             Predicted
+               Y    N
+             +--------
+    Actual Y | 100  5
+           N | 10   50
+
+    Total corpus size: 165
+    Total predicted yes: 110
+    Total predicted no: 55
+    Actual yes: 105
+    Actual no: 60
+
+    Accuracy = (100 + 50) / 160 = 0.91
+    Error = (5 + 10) / 160 = 0.09
+
+Precision, Recall, F-measure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+What about "X vs. non-X" types of problems: spam v. not spam, relevant v. not relevant?
+
+.. math::
+    precision = \frac{\text{# relevant records retrieved}}{\text{total # of records retrieved}}
+
+.. math::
+    recall = \frac{\text{# relevant records received}}{\text{total # of relevant records}}
+
+.. math::
+    F measure = \frac{2 * P * R}{P + R}
+
+So, going back to our example, but now we're predicting whether or not something is relevant...
+
+.. code-block:: text
+
+             Predicted
+               Y    N
+             +--------
+    Actual Y | 100  5
+           N | 10   50
+
+    Accuracy = (100 + 50) / 160 = 0.91
+
+    Precision = TP / (TP + FP) = 100 / 110 = 0.91
+    Recall = TP / (TP + FN) = 100 / 105 = 0.95
+    F1 score = (2 * 0.91 * 0.95) / (0.91 + 0.95) = 0.93
+
+**TLDR**:
+
+.. code-block::
+
+             Predicted
+               Y   N
+             +-------
+    Actual Y | TP  FN
+           N | FP  TN
+
+.. math::
+    accuracy = \frac{TP + TN}{P + N}
+
+.. math::
+    precision = \frac{TP}{TP + FP}
+
+.. math::
+    recall = \frac{TP}{TP + FN}
+
+Reporting Performance
+^^^^^^^^^^^^^^^^^^^^^
+
+- separate training and test data
+    - never see test data in training
+    - usually 80-20 split
+- k-fold cross validation
+    - why just split once?
+    - run k iterations, in each iteration hold out a different test set
+    - improves robustness of reported set

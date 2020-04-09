@@ -11,6 +11,8 @@ Welcome to cse142-notes's documentation!
    :caption: Contents:
 
    intro
+   regression
+   prob
 
 
 
