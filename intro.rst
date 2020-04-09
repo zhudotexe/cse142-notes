@@ -288,7 +288,7 @@ So, going back to our example, but now we're predicting whether or not something
 
 **TLDR**:
 
-.. code-block::
+.. code-block:: text
 
              Predicted
                Y   N
