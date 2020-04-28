@@ -378,5 +378,5 @@ We can extend logistic regression to multiple classes:
 .. note::
     Class :math:`\theta_K` is actually redundant, since :math:`p(class = K | \mathbf{x}) = 1 - \sum_{k=1}^{K-1} p(class = k | \mathbf{x})`.
 
-    
+
 

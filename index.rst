@@ -13,6 +13,11 @@ Welcome to cse142-notes's documentation!
    intro
    regression
    prob
+   inst
+   naivebayes
+   perceptron
+   linearmodels
+   tree
 
 
 
