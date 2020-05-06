@@ -18,6 +18,7 @@ Welcome to cse142-notes's documentation!
    perceptron
    linearmodels
    tree
+   svm
 
 
 
