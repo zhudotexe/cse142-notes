@@ -19,6 +19,7 @@ Welcome to cse142-notes's documentation!
    linearmodels
    tree
    svm
+   kernel
 
 
 

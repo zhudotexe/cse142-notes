@@ -148,8 +148,13 @@ Hard-Margin SVM
     - constraints are linear
 - this is called the *primal form*, but most people solve the *dual form*
 
+We can encode the primal form algebraically:
+
+.. math::
+    \min_{w, b} \max_{\alpha \geq 0} \frac{1}{2}(w \cdot w) + \sum_i \alpha_i (1-y_i(w \cdot x_i + b))
+
 Dual Form
-"""""""""
+^^^^^^^^^
 
 - does not change the solution
 - introduces new variables :math:`\alpha_n` for each training instance
@@ -179,3 +184,73 @@ For soft-margin SVMs, support vectors are:
 - points on the wrong side of the hyperplane (:math:`\xi \geq 1`)
 
 **Conclusion**: w and b only depend on the support vectors
+
+Derivation
+""""""""""
+
+Given the algebriaecally encoded primal form:
+
+.. math::
+    \min_{w, b} \max_{\alpha \geq 0} \frac{1}{2}(w \cdot w) + \sum_i \alpha_i (1-y_i(w \cdot x_i + b))
+
+We can switch the order of the min and max:
+
+.. math::
+    \max_{\alpha \geq 0} \min_{w, b} \frac{1}{2}(w \cdot w) + \sum_i \alpha_i (1-y_i(w \cdot x_i + b)) \\
+    = \max_{\alpha \geq 0} \min_{w, b} L(w, b, \alpha)
+
+To solve inner min, differentiate L wrt w and b:
+
+.. math::
+    \frac{\partial L(w, b, \alpha)}{\partial w_k} & = w_k - \sum_i \alpha_i y_i x_{i,k} &  \\
+    \frac{\partial L(w, b, \alpha)}{\partial w} & = w - \sum_i \alpha_i y_i x_i & \to w = \sum_i \alpha_i y_i x_i \\
+    \frac{\partial L(w, b, \alpha)}{\partial b} & = - \sum_i \alpha_i y_i & \to \sum_i \alpha_i y_i = 0
+
+- :math:`w = \sum_i \alpha_i y_i x_i` means **w** is a weighted sum of examples
+- :math:`\sum_i \alpha_i y_i = 0` means positive and negative examples have the same weight
+- :math:`\alpha_i > 0` only when :math:`x_i` is a support vector, so **w** is a sum of signed *support vectors*
+
+.. image:: _static/svm/ex5.png
+
+.. image:: _static/svm/ex6.png
+
+**Conclusion**
+
+.. image:: _static/svm/ex7.png
+
+**Soft-Margin**
+
+.. image:: _static/svm/ex8.png
+
+subject to :math:`0 \leq \alpha_i \leq c` :math:`(\forall i)`
+
+Non-Linearly-Seperable
+----------------------
+
+What if our data is not linearly seperable?
+
+- use a non-linear classifier
+- transform our data so that it is, somehow
+    - e.g. adding a dummy dimension based on a quadratic formula of the real dimension
+
+.. image:: _static/svm/ex9.png
+    :width: 500
+
+Feature Mapping
+^^^^^^^^^^^^^^^
+We can map the original feature vector to a higher dimensional space :math:`\phi(x)`
+
+e.g. quadratic feature mapping:
+
+.. math::
+    \phi(x) = < & 1, 2x_1, 2x_2, ..., 2x_D, \\
+    & x_1^2, x_1x_2, ..., x_1x_D, \\
+    & x_2x_1, x_2^2, ..., x_2x_D, \\
+    & ... >
+
+Pros: this improves separability, you can apply a linear model more confidently
+
+Cons: There are a lot more features now, and a lot of repeated features - lots of computation and easier to overfit
+
+
+
