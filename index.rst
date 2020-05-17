@@ -20,6 +20,7 @@ Welcome to cse142-notes's documentation!
    tree
    svm
    kernel
+   unsupervised
 
 
 
