@@ -21,6 +21,10 @@ Welcome to cse142-notes's documentation!
    svm
    kernel
    unsupervised
+   pca
+   emgmm
+   boosting
+   nn
 
 
 
